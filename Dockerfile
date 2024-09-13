@@ -24,8 +24,7 @@ RUN apt-get install -y \
 # Create GeoServer data directory (persistent volume)
 RUN mkdir -p /var/lib/geoserver/data
 
-# Copy GeoServer configuration (optional, for persistence)
-# Replace `/path/to/your/config.xml` with your actual configuration file
+# Copy GeoServer configuration from the current directory
 COPY config.xml /etc/geoserver/config.xml
 
 # Expose GeoServer port (default: 8080)
