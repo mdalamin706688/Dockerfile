@@ -1,5 +1,5 @@
 # Base image with OpenJDK 17 for broader compatibility
-FROM eclipse-temurin:17-slim
+FROM adoptium/temurin:17-slim
 
 # Set working directory
 WORKDIR /opt/geoserver
