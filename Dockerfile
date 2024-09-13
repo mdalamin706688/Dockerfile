@@ -1,21 +1,13 @@
-# Base image with OpenJDK 17 for broader compatibility
-FROM adoptium/temurin:17-slim
+FROM tomcat:9.0-jre11-openjdk
 
-# Set working directory
-WORKDIR /opt/geoserver
+# Download GeoServer WAR file directly
+RUN wget https://sourceforge.net/projects/geoserver/files/GeoServer/${GEOSERVER_VERSION}/geoserver-${GEOSERVER_VERSION}.war -O /opt/geoserver.war
 
-# Download GeoServer WAR file (replace with desired version)
-RUN wget https://downloads.sourceforge.net/geoserver/geoserver-2.29.2.war -O geoserver.war
+# Copy GeoServer WAR file
+COPY /opt/geoserver.war /usr/local/tomcat/webapps/geoserver.war
 
-# Expose GeoServer port (default: 8080)
+# Expose port 8080
 EXPOSE 8080
 
-# Environment variables for GeoServer configuration (modify as needed)
-ENV GEOSERVER_DATA_DIR=/data
-
-# Copy WAR file and create data directory
-COPY geoserver.war .
-RUN mkdir -p $GEOSERVER_DATA_DIR
-
-# Start GeoServer using the provided wrapper script (modify if needed)
-CMD ["/opt/geoserver/bin/startup.sh"]
+# Start Tomcat
+CMD ["catalina.sh", "run"]
