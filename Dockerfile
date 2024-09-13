@@ -1,5 +1,5 @@
 # Use OpenJDK 17 for better support and security
-FROM openjdk:17-jre
+FROM openjdk:17-slim
 
 # Set GeoServer version
 ENV GEOSERVER_VERSION 2.21.0
